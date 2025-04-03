@@ -22,6 +22,7 @@ import laika.helium.config.TextLink
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+ThisBuild / version := "0.9.0" // <-- Added line
 ThisBuild / tlBaseVersion := "0.9" // your current series x.y
 
 ThisBuild / organization := "org.creativescala"
@@ -55,8 +56,6 @@ commands += Command.command("build") { state =>
     "scalafmtSbt" ::
     "headerCreateAll" ::
     "githubWorkflowGenerate" ::
-    "dependencyUpdates" ::
-    "reload plugins; dependencyUpdates; reload return" ::
     "docs / tlSite" ::
     state
 }
