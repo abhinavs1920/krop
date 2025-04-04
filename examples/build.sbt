@@ -14,5 +14,5 @@ lazy val examples = project
     // Set Krop into development mode
     run / javaOptions += "-Dkrop.mode=development",
     run / fork := true,
-    Compile / run / mainClass := Some("examples.runHtmx")
+    Compile / run / mainClass := Some("examples.runBlog")
   )
