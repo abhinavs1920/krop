@@ -8,16 +8,18 @@ object Blog {
 
   private val posts = List(
     Post("1", "First Post", "Welcome to my Krop blog!"),
-    Post("2", "Example", "Interactive web apps made easy")
+    Post("2", "HTMX Example", "Interactive web apps made easy")
   )
 
-  val postRoute =
+  // Post Detail Route
+  private val postRoute =
     Route(
       Request.get(Path / "post" :? Query("id", Param.string)),
       Response.ok(Entity.scalatags)
     )
 
-  val index =
+  // Enhanced Index Page
+  private val index =
     html(
       body(
         h1("My Blog"),
@@ -25,13 +27,15 @@ object Blog {
           posts.map { post =>
             div(cls := "post")(
               h2(a(href := s"/post?id=${post.id}", post.title)),
-              p(post.content)
+              p(post.content.take(100) + "..."),
+              a(href := s"/post?id=${post.id}", "Read more")
             )
           }
         )
       )
     )
 
+  // Handlers
   val indexHandler =
     Route(Request.get(Path.root), Response.ok(Entity.scalatags))
       .handle(() => index)
